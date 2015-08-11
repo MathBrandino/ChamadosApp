@@ -1,5 +1,6 @@
 package br.com.caelum.chamadosapp.helper;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -9,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import br.com.caelum.chamadosapp.R;
-import br.com.caelum.chamadosapp.activity.FormularioActivity;
 import br.com.caelum.chamadosapp.modelo.Chamado;
 
 /**
@@ -17,7 +17,7 @@ import br.com.caelum.chamadosapp.modelo.Chamado;
  */
 public class FormularioHelper {
 
-    private FormularioActivity activity;
+    private Activity activity;
     private EditText nomeCliente;
     private EditText aparelho;
     private EditText descricao;
@@ -25,7 +25,7 @@ public class FormularioHelper {
     private android.support.design.widget.FloatingActionButton abreCamera;
     private Chamado chamado;
 
-    public FormularioHelper(FormularioActivity activity) {
+    public FormularioHelper(Activity activity) {
         this.activity = activity;
 
         nomeCliente = (EditText) activity.findViewById(R.id.nome_cliente);
@@ -38,7 +38,6 @@ public class FormularioHelper {
     }
 
     public Chamado pegaChamadoDoFormulario() {
-
 
         chamado.setNomeDoCliente(nomeCliente.getText().toString());
         chamado.setAparelho(aparelho.getText().toString());

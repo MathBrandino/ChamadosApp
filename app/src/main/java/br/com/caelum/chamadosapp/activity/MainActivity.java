@@ -50,57 +50,61 @@ public class MainActivity extends AppCompatActivity {
 
                 final Chamado chamado = chamados.get(position);
 
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("O que deseja fazer ?")
-                        .setIcon(R.drawable.mobile)
-                        .setPositiveButton("Enviar chamado", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                Intent enviarChamado = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                                        "mailto", "YourEmail@here.com", null));
-
-                                enviarChamado.putExtra(Intent.EXTRA_SUBJECT, "Chamado de " + chamado.getNomeDoCliente());
-
-                                enviarChamado.putExtra(Intent.EXTRA_TEXT, "Aparelho :  " + chamado.getAparelho()
-                                        + "\n" + "Descricão :  " + chamado.getDescricao());
-
-
-                                if (chamado.getCaminhoImagem() != null) {
-                                    File file = new File(chamado.getCaminhoImagem());
-                                    Uri uri = Uri.fromFile(file);
-
-                                    enviarChamado.putExtra(Intent.EXTRA_STREAM, uri
-                                    );
-                                }
-
-                                startActivity(enviarChamado);
-
-                            }
-                        })
-                        .setNegativeButton("Deletar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ChamadoDAO dao = new ChamadoDAO(MainActivity.this);
-
-                                dao.deletaChamado(chamado);
-
-                                populaLista();
-                            }
-                        })
-                        .setNeutralButton("Alterar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent edicao = new Intent(MainActivity.this, FormularioActivity.class);
-                                edicao.putExtra("chamado", chamado);
-                                startActivity(edicao);
-                            }
-                        })
-                        .setCancelable(true)
-                        .show();
+                criaAlertaOpcoes(chamado);
             }
         });
 
+    }
+
+    private void criaAlertaOpcoes(final Chamado chamado) {
+
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("O que deseja fazer ?")
+                .setIcon(R.drawable.mobile)
+                .setPositiveButton("Enviar chamado", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent enviarChamado = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto", "YourEmail@here.com", null));
+
+                        enviarChamado.putExtra(Intent.EXTRA_SUBJECT, "Chamado de " + chamado.getNomeDoCliente());
+
+                        enviarChamado.putExtra(Intent.EXTRA_TEXT, "Aparelho :  " + chamado.getAparelho()
+                                + "\n" + "Descricão :  " + chamado.getDescricao());
+
+
+                        if (chamado.getCaminhoImagem() != null) {
+                            File file = new File(chamado.getCaminhoImagem());
+                            Uri uri = Uri.fromFile(file);
+
+                            enviarChamado.putExtra(Intent.EXTRA_STREAM, uri);
+                        }
+
+                        startActivity(enviarChamado);
+
+                    }
+                })
+                .setNegativeButton("Deletar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ChamadoDAO dao = new ChamadoDAO(MainActivity.this);
+
+                        dao.deletaChamado(chamado);
+
+                        populaLista();
+                    }
+                })
+                .setNeutralButton("Alterar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent edicao = new Intent(MainActivity.this, FormularioActivity.class);
+                        edicao.putExtra("chamado", chamado);
+                        startActivity(edicao);
+                    }
+                })
+                .setCancelable(true)
+                .show();
     }
 
     private void populaLista() {

@@ -136,6 +136,8 @@ public class FormularioActivity extends AppCompatActivity {
         } else {
             dao.alteraChamado(chamado);
         }
+
+        dao.close();
     }
 }
 
