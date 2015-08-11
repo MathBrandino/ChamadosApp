@@ -43,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
         populaLista();
 
+        if (chamados.size() == 0){
+            mostraComoUsar();
+        }
+
 
         listaDeChamados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -154,9 +158,21 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void mostraComoUsar() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Instrucões")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage("Para abrir um novo chamado, clique no botão '+', " +
+                        "preencha o formulário e o salve. Em seguida clique no chamado e envie o chamado para nós. " +
+                        "Responderemos o mais breve possível.")
+                .show();
     }
 }
