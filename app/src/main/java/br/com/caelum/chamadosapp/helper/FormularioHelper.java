@@ -8,8 +8,6 @@ import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import java.io.File;
-
 import br.com.caelum.chamadosapp.R;
 import br.com.caelum.chamadosapp.activity.FormularioActivity;
 import br.com.caelum.chamadosapp.modelo.Chamado;
@@ -106,7 +104,7 @@ public class FormularioHelper {
         aparelho.setText(chamado.getAparelho());
         descricao.setText(chamado.getDescricao());
 
-        if(chamado.getCaminhoImagem() != null) {
+        if (chamado.getCaminhoImagem() != null) {
             fotoChamado.setImageURI(Uri.parse(chamado.getCaminhoImagem()));
         }
         this.chamado = chamado;

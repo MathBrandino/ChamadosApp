@@ -25,7 +25,7 @@ public class ChamadoDAO extends SQLiteOpenHelper {
     private final String DESCRICAO = "descricao";
     private final String CAMINHO_IMAGEM = "caminhoImagem";
 
-    public ChamadoDAO(Context context){
+    public ChamadoDAO(Context context) {
         super(context, NOME_BANCO, null, VERSAO);
     }
 
@@ -35,10 +35,10 @@ public class ChamadoDAO extends SQLiteOpenHelper {
 
         sql = "CREATE TABLE " + TABELA_CHAMADO +
                 "(id INTEGER PRIMARY KEY," +
-                " "+ CLIENTE +" TEXT NOT NULL," +
-                " "+ APARELHO+ " TEXT NOT NULL," +
-                " "+ CAMINHO_IMAGEM +" TEXT," +
-                " " + DESCRICAO +" TEXT NOT NULL" +
+                " " + CLIENTE + " TEXT NOT NULL," +
+                " " + APARELHO + " TEXT NOT NULL," +
+                " " + CAMINHO_IMAGEM + " TEXT," +
+                " " + DESCRICAO + " TEXT NOT NULL" +
                 ");";
 
         db.execSQL(sql);
@@ -49,7 +49,7 @@ public class ChamadoDAO extends SQLiteOpenHelper {
 
     }
 
-    public void insereChamado(Chamado chamado){
+    public void insereChamado(Chamado chamado) {
 
         ContentValues values = new ContentValues();
 
@@ -61,7 +61,7 @@ public class ChamadoDAO extends SQLiteOpenHelper {
         getWritableDatabase().insert(TABELA_CHAMADO, null, values);
     }
 
-    public void alteraChamado(Chamado chamado){
+    public void alteraChamado(Chamado chamado) {
 
         ContentValues values = new ContentValues();
 
@@ -70,20 +70,20 @@ public class ChamadoDAO extends SQLiteOpenHelper {
         values.put(DESCRICAO, chamado.getDescricao());
         values.put(CAMINHO_IMAGEM, chamado.getCaminhoImagem());
 
-        String args[] = { String.valueOf(chamado.getId()) };
+        String args[] = {String.valueOf(chamado.getId())};
 
         getWritableDatabase().update(TABELA_CHAMADO, values, "id=?", args);
     }
 
-    public List<Chamado> devolveLista(){
+    public List<Chamado> devolveLista() {
 
         List<Chamado> chamados = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + TABELA_CHAMADO +" ;";
+        String sql = "SELECT * FROM " + TABELA_CHAMADO + " ;";
 
         Cursor cursor = getWritableDatabase().rawQuery(sql, null);
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             Chamado chamado = new Chamado();
 
@@ -99,7 +99,7 @@ public class ChamadoDAO extends SQLiteOpenHelper {
         return chamados;
     }
 
-    public void deletaChamado(Chamado chamado){
+    public void deletaChamado(Chamado chamado) {
 
         String[] args = {String.valueOf(chamado.getId())};
 

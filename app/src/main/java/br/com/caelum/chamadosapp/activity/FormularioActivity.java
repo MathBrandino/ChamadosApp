@@ -89,7 +89,7 @@ public class FormularioActivity extends AppCompatActivity {
     private void verificaSeEhEdicaoESetaCampos() {
         Intent intent = getIntent();
 
-        if (intent.hasExtra("chamado")){
+        if (intent.hasExtra("chamado")) {
             Chamado chamado = (Chamado) intent.getSerializableExtra("chamado");
 
             helper.colocaChamadoNoFormulario(chamado);
@@ -131,7 +131,7 @@ public class FormularioActivity extends AppCompatActivity {
     private void insereOuAlteraChamado(Chamado chamado) {
         ChamadoDAO dao = new ChamadoDAO(this);
 
-        if (chamado.getId() == null){
+        if (chamado.getId() == null) {
             dao.insereChamado(chamado);
         } else {
             dao.alteraChamado(chamado);

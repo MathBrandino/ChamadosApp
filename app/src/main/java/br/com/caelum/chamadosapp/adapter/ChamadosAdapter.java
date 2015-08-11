@@ -1,12 +1,7 @@
 package br.com.caelum.chamadosapp.adapter;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,9 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.caelum.chamadosapp.R;
-import br.com.caelum.chamadosapp.activity.FormularioActivity;
 import br.com.caelum.chamadosapp.activity.MainActivity;
-import br.com.caelum.chamadosapp.dao.ChamadoDAO;
 import br.com.caelum.chamadosapp.modelo.Chamado;
 
 /**
@@ -32,18 +25,6 @@ public class ChamadosAdapter extends BaseAdapter {
     public ChamadosAdapter(List<Chamado> chamados, MainActivity activity) {
         this.chamados = chamados;
         this.activity = activity;
-    }
-
-    private class ViewHolder{
-        ImageView imagemAparelho;
-        TextView aparelho;
-        TextView descricao;
-
-        public ViewHolder(View view) {
-            aparelho = (TextView) view.findViewById(R.id.item_nome_aparelho);
-            descricao = (TextView) view.findViewById(R.id.item_descricao);
-            imagemAparelho = (ImageView) view.findViewById(R.id.foto_chamado);
-        }
     }
 
     @Override
@@ -63,7 +44,7 @@ public class ChamadosAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view ;
+        View view;
 
         final Chamado chamado = (Chamado) getItem(position);
 
@@ -88,7 +69,7 @@ public class ChamadosAdapter extends BaseAdapter {
         if (chamado.getCaminhoImagem() != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(chamado.getCaminhoImagem());
 
-            Bitmap bitmapReduzido =Bitmap.createScaledBitmap(bitmap, 200, 200, true);
+            Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
 
             imagemAparelho.setImageBitmap(bitmapReduzido);
         }
@@ -98,5 +79,17 @@ public class ChamadosAdapter extends BaseAdapter {
 
         TextView descricao = holder.descricao;
         descricao.setText(chamado.getDescricao());
+    }
+
+    private class ViewHolder {
+        ImageView imagemAparelho;
+        TextView aparelho;
+        TextView descricao;
+
+        public ViewHolder(View view) {
+            aparelho = (TextView) view.findViewById(R.id.item_nome_aparelho);
+            descricao = (TextView) view.findViewById(R.id.item_descricao);
+            imagemAparelho = (ImageView) view.findViewById(R.id.foto_chamado);
+        }
     }
 }

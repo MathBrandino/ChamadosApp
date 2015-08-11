@@ -20,29 +20,28 @@ public class Chamado implements Serializable {
         this.id = id;
     }
 
-    public void setNomeDoCliente(String nomeDoCliente) {
-        this.nomeDoCliente = nomeDoCliente;
-    }
-
     public String getNomeDoCliente() {
         return nomeDoCliente;
     }
 
-
-    public void setAparelho(String aparelho) {
-        this.aparelho = aparelho;
+    public void setNomeDoCliente(String nomeDoCliente) {
+        this.nomeDoCliente = nomeDoCliente;
     }
 
     public String getAparelho() {
         return aparelho;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setAparelho(String aparelho) {
+        this.aparelho = aparelho;
     }
 
     public String getDescricao() {
         return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getCaminhoImagem() {
