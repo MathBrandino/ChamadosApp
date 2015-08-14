@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     private void populaLista() {
 
         chamados = dao.devolveLista();
+        dao.close();
 
         adapter = new ChamadosAdapter(chamados, this);
 

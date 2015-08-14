@@ -29,6 +29,7 @@ public class ChamadoDAO extends SQLiteOpenHelper {
         super(context, NOME_BANCO, null, VERSAO);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql;
@@ -47,6 +48,10 @@ public class ChamadoDAO extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+        String sql = "Drop table if exists " + TABELA_CHAMADO + " ;";
+
+        db.execSQL(sql);
+        onCreate(db);
     }
 
     public void insereChamado(Chamado chamado) {
